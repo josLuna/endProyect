@@ -1,0 +1,53 @@
+.list{
+    display: flex;
+    width:100%;
+}
+.hader1{
+    width:50%;
+}
+.p1{
+    margin-top: 17px;
+    margin-bottom: 10px;
+    padding: 0px 10px;
+}
+.p2{
+    margin-top: 17px;
+    margin-bottom: 10px;
+    padding: 0px 10px;
+    display: flex;
+    width:80%;
+}
+.input1{
+    margin-top: -10px;
+    border-bottom: 1px solid #0000006e;
+}
+
+ion-toolbar{
+    --background: rgb(6, 6, 114);
+    color: white;
+    font-family: system-ui;
+}
+.btn1{
+    width: 30%;
+    margin-left: 8%;
+    --background: rgb(6 6 114 / 73%);
+}
+.btn2{
+    width: 30%;
+    margin-left: 20%;
+    --background: rgba(252, 5, 5, 0.73);
+}
+.botones{
+      display: flex;
+}
+.cuerpo{
+    padding: 2em 6px 0 6px;
+}
+.togl{
+    height: 20px;
+    width: 47px;
+    margin: 0px 6px 0px 9em
+}
+.tiTog{
+    font-weight: 600;
+}

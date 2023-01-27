@@ -1,17 +1,73 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      Tab 2
+    CLIENTE REGISTRADOR
     </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar style="--background: #ffffff; --border-radius: 7px;" [debounce]="1000" show-clear-button="always" (ionChange)="handleChange($event)" clear-icon="close-circle" ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="useService.msgCon == true">
+  <ion-item class="Erro" >
+    <ion-label >La consulta no se realiso!! <br> Revisalo con el Programador </ion-label>
+  </ion-item>
+  <br>
+  <ion-button expand="block" (click)="Lista()" *ngIf="useService.msgCon== false">
+    Aceptar
+  </ion-button>
+</div>
+  <!--<h2 style="color: red;" *ngIf="useService.contactosUser.length == 0">No hay contactos</h2>
+  
+<ion-item>
+  <ion-list>
+    <app-contacto *ngFor="let contacAux of useService.contactosUser" [name]="contacAux.nombre " [phone]="contacAux.nuDom" [mail]="contacAux.calle" [note]="contacAux.tipCliente" [id]="contacAux._id"  ></app-contacto>
+  </ion-list>
+</ion-item>-->
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <!-- List of Text Items -->
+  <h2 *ngIf="useService.status == 'false'" class="Meng" ><ion-icon name="globe-sharp"></ion-icon> ¡Sin coneccion a Internet!</h2>
+ <!-- <h2 style="color: rgba(14, 143, 10, 0.63); font-family: system-ui;"  class="Meng1" >Clientes Registrados</h2>
+  <ion-item *ngIf="useService.contactUser.length != 0">
+    <h2 style="color: rgb(217, 255, 0);"*ngIf="useService.status == 'false'"  class="Meng" >¡Captura al cliente!</h2>
+  </ion-item>-->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start"  >
+    <ion-fab-button  id="popover-button">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-popover  trigger="popover-button" [dismissOnSelect]="true" >
+      <!--<ng-template>
+        <ion-content class="ion-padding" (click)="Lista()">Hello World!</ion-content>
+      </ng-template>-->
+      <ng-template >
+            <ion-item  [button]="true" routerLink="/tabs/tab1"  [detail]="false">Nuevo cliente</ion-item>
+      </ng-template>
+    </ion-popover>
+  </ion-fab>
+  <br>
+
+  <p *ngIf="msgAlert == true">No hay regristro</p>
+    <!--<ion-list *ngIf="useService.status == 'true'">-->
+    <ion-list class="listaTop">
+      <!--<app-contacto *ngFor="let contacAux of useService.getCli; let i = index;" [name]="contacAux.name" [id]="contacAux._id" [IP]="i"></app-contacto>-->
+      <app-contacto *ngFor="let contacAux of useService.results; let i = index;" [name]="contacAux.nombre"  [id]="contacAux._id" [IP]="i"></app-contacto>
+    </ion-list>
+     <!--<ion-list *ngIf="useService.status == 'false'">-->
+    <ion-list>
+      <app-off-con *ngFor="let contacAux of useService.contactUser; let i = index;" [name]="contacAux.name" [id]="i"></app-off-con>
+    </ion-list>
+    <br>
+    <br>
+    <br>
+    <!--<ion-button expand="block" (click)="Lista()">
+    Agregar Cliente
+  </ion-button>-->
 </ion-content>

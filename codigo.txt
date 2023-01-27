@@ -1,0 +1,2 @@
+ <ion-input [(ngModel)]="sumLados[i]" type="number"  value='{{ladosAux}}' class="form-control" [readonly]="true">Mts></ion-input>
+con este inputo puedes hacer que no necesites de array para podificar cosas 

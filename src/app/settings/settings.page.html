@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<br>
+  <br>
+  <br>
+  <!--  <ion-list style="margin: 3em 0em 0em ">
+    <ion-item>
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      <a (click)="cerrarSesion()">LOGOUT</a>
+    </ion-item>
+  </ion-list>
+  <br>
+  <br>
+  <ion-list >
+    <ion-item>
+      <ion-icon slot="start" name="cash-outline"></ion-icon>
+      <a (click)="costos()">CAMBIAR COSTOS</a>
+    </ion-item>
+  </ion-list>
+   <br>
+  <br>
+ <ion-list>
+    <ion-item>
+      <ion-icon slot="start" name="document-text-outline"></ion-icon>
+      <a (click)="pdf()">PDF:MODIFICACIÓN </a>
+    </ion-item>
+  </ion-list>
+  <br>
+  <br>
+  <ion-list>
+    <ion-item>
+      <ion-icon slot="start" name="cloud-done-outline"></ion-icon>
+      <a (click)="status()">ESTATUS CLIENTE</a>
+    </ion-item>
+  </ion-list>--> 
+
+      <ion-card class="card" (click)="cerrarSesion()">
+        <ion-card-content style="margin-top: -10px;">
+          <div class="disp"> 
+              <ion-icon class="iLo" name="log-out-outline"></ion-icon>
+              <br>
+              <a style="font-size: 10pt; font-weight: bold;">LOGOUT</a>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="card" (click)="costos()">
+        <ion-card-content style="margin-top: -10px;">
+            <div class="disp"> 
+              <ion-icon class="iLo"  name="cash-outline"></ion-icon>
+              <br>
+              <a style="font-size: 10pt; font-weight: bold;">CAMBIAR COSTOS</a>
+            </div>
+        </ion-card-content>
+      </ion-card>
+  <ion-item class="item1">
+    <p class="p1">
+      Derechos reservados de autor, cualquier plagio sera asignado a las autoridades
+    </p>
+  </ion-item>
+ <!-- <ion-list >
+    <ion-item>
+      <ion-icon slot="start" name="moon"></ion-icon>
+      <ion-label>MODO OSCURO</ion-label>
+      <ion-toggle slot="end"  (ionChange)="toggleTheme($event)"></ion-toggle>
+    </ion-item>
+  </ion-list>-->
+</ion-content>
+

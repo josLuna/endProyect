@@ -1,0 +1,89 @@
+<ion-header style="display: flex;">
+  <ion-toolbar style="background-color: rgb(6, 6, 114)">
+    <ion-title>Generador de PDF</ion-title>
+  </ion-toolbar>
+  <ion-buttons style="padding: 0 15pt 0 0;">
+    <!-- <ion-button (click)="back()" style="border-radius: 10pt; background-color: red; color:white;">
+      X
+    </ion-button>
+    &nbsp;&nbsp;-->
+    <ion-button *ngIf="useService.useArea.length != 0" (click)="pdf()"
+      style="border-radius: 8pt; background-color: rgb(6, 141, 252); color:white;">
+      Pdf
+    </ion-button>
+  </ion-buttons>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div id="div1" >
+    <ion-item style="display: flex; ">
+      <div style="display: flex; flex-direction: column; position:absolute;">
+        <p style="margin-bottom: -21px; font-size: 12px;padding: 0px 0px 0px 3px;">Fumigaciones</p>
+        <p style="color: #060672; font-size: large; font-weight: bold;">San Marcos</p>
+      </div>
+      <!--<p style="position:absolute; right: 0;">hola mundo</p>-->
+    </ion-item>
+    <br>
+    <br>
+    <div style="margin: 0 0 0 2em; ">
+      <h1 style="font-size: 1.3em;">Nombre del Cliente:</h1>
+      <p style="font-size: 19px; margin: -7px 0px 0 0px;">{{useService.nombre1}}</p>
+      <br>
+      <h1 style="font-size: 1.3em; margin-top: 7px; margin-bottom: 0px">Direción:</h1>
+      <p style="font-size: 19px; margin: 0px 0px 0 0px;">Col: {{useService.colonia1}}</p>
+      <p style="font-size: 19px; margin: 0px 0px 0 0px;">Calle: {{useService.calle1}} </p>
+      <p style="font-size: 19px; margin: 0px 0px 0 0px;"> N° Ext: {{useService.nuDom1}}</p>
+      <p *ngIf="useService.iuDum1" style="font-size: 19px; margin: 0px 0px 0 0px;">N° Int: {{useService.iuDum1}}</p>
+    </div>
+    <h3 *ngIf=" useService.useArea.length == 0" style="font-size: 30px;
+    text-align: center; color: red;">Notiene registro de areas</h3>
+    <h3 style="font-size: 1.5em; text-align: center;">Tabla de areas</h3>
+    <div  class="tog" *ngFor="let tab of useService.useArea; let i = index; ">
+      <!--<table style="width:100%; position:absolute; top: 0; 
+        bottom: 0; left: 0; right: 0; border: 1;">-->
+      <table style="width: 80%;  margin: 0 0 0 10%; ">
+        <thead style="background-color: black; color: white; border: 1px solid;">
+          <th style="text-align: center;">Nombre</th>
+          <th style="text-align: center;">Medidas</th>
+          <th style="text-align: center;">Costo</th>
+          <th style="text-align: center;">Prf.|| M</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b  of tab.areas; let i = index; ">
+            <td style="text-align: center; border-bottom: 1px solid;">{{b.numCuar}}</td>
+            <td style="text-align: center; border-bottom: 1px solid;">
+              <p style="margin: 1pt 0 1pt 0;" *ngFor="let d of b.sumLados; let e = index"><a style="color: black;" *ngIf="b.mLineal != 0">{{d}} Mts</a><a style="color: black;" *ngIf="b.mLineal == 0">0 Mts</a></p>
+              <!--<ul >
+                <li *ngFor="let d of b.sumLados; let e = index">
+                    {{d}} Mts
+                </li>
+              </ul>
+             <pre> {{tab.areas.area.lados | json}} </pre> -->
+            </td>
+            <td style="text-align: center; border-bottom: 1px solid;">
+              {{b.result1 | currency: 'USD' | lowercase}}
+            </td>
+            <td style=" border-bottom: 1px solid;">
+              <p *ngIf="b.resultado"> {{b.resultado}} P</p>
+              <p *ngIf="b.mCu"> {{b.mCu}} M²</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center; border-bottom: 1px solid; display: flex;">
+              <h3 style="font-size: 15px;">Total: {{tab.total | currency: 'USD' | lowercase}}</h3>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <br>
+    <div style="margin: 0 0 0 2em;">
+      <p>P: Perforaciones</p>
+      <p>M: Metros</p>
+    </div>
+  </div>
+  <br>
+  <ion-button *ngIf=" useService.useArea.length != 0" expand="block" (click)="moDaPdf()">
+    Editar Areas!!
+  </ion-button>
+</ion-content>

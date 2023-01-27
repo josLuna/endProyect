@@ -1,0 +1,112 @@
+.content{
+    display: flex;
+    width: 96%;
+  }
+  .espacio{
+    margin-top: 3em;
+  }
+  .ion-item{
+    margin-left: 1em;
+  }
+  .title{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  .title1{
+    width: 94%;
+    margin-left: 8px;
+  }
+  .btnPrin{
+    width: 90%;
+    margin: 0 0 0 5%;
+    //background: #48a780;
+  }
+
+  .btnPrin1{
+    width: 8em;
+    margin-left: 2em;
+  }
+  .lado1{
+   width:50%;
+  }
+  .lado2{
+    width:50%;
+  }
+  .p2{
+    font-size: 11pt;
+    color: black;
+    margin: 0 0 -1px 0;
+  }
+  .h9{
+    font-size: 12pt;
+    font-weight: bolder;
+    margin-top: 5px;
+  }
+  .term{
+    text-align: center;
+  }
+  .togl{
+    height: 21px;
+    width: 51px;
+  }
+  .tiTog{
+    font-size: 15px;
+  }
+  .h8{
+    margin: 8px 0px 0px 86px;
+    font-size: 10pt;
+    font-weight: bolder;
+  }
+.head{
+  display: flex;
+}
+.Lad{
+  font-size: 19px;
+  margin: 0 0px -10px 0px;
+}
+.ad{
+  margin: 12px 0px 1px 2.3em;
+}
+.borde{
+  display: flex;
+  margin: 0 2em 0 2em;
+  background: #4b8aff4f;
+  border-radius: 1em;
+}
+.total{
+  margin-left: 1em;
+}
+.text1{
+  margin: 1.3em 0px 0px 1em;
+  font-size: 1.1em;
+}
+.item{
+  width: 95%;
+}
+.nameCal{
+  margin: 0 0 0 17px;
+}
+.btnPrin2{
+  width: 90%;
+  margin: 1em 0 0 5%;
+  --background: red;
+}
+.ReNA{
+  display: flex;
+  justify-content: space-between;
+}
+.p1{
+  color: rgb(85 82 82);
+}
+.item1{
+  font-size: 9pt;
+  margin: -9pt 0 -12pt 0;
+}
+.hr1{
+  margin: 3%;
+  background: #7d7d7d94;
+  height: 1px;
+  border-width: none;
+}
