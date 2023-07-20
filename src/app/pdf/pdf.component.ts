@@ -563,7 +563,7 @@ export class PdfComponent implements OnInit {
       total: this.p
     }
     
-    
+    console.log(this.userService.status)
     if (this.userService.status == 'true') {
       this.userService.postArch(cotiz)
       this.sumList = []
@@ -621,7 +621,7 @@ export class PdfComponent implements OnInit {
             text: 'OK',
             role: 'confirm',
             handler: () => {
-              this.userService.status = localStorage.getItem('sattus')
+              this.userService.status = localStorage.getItem('status')
               this.redi()
 
             },

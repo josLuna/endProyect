@@ -14,7 +14,7 @@
   </ion-buttons>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <div id="div1" >
+  <div id="div1">
     <ion-item style="display: flex; ">
       <div style="display: flex; flex-direction: column; position:absolute;">
         <p style="margin-bottom: -21px; font-size: 12px;padding: 0px 0px 0px 3px;">Fumigaciones</p>
@@ -37,21 +37,22 @@
     <h3 *ngIf=" useService.useArea.length == 0" style="font-size: 30px;
     text-align: center; color: red;">Notiene registro de areas</h3>
     <h3 style="font-size: 1.5em; text-align: center;">Tabla de areas</h3>
-    <div  class="tog" *ngFor="let tab of useService.useArea; let i = index; ">
+    <div class="tog" *ngFor="let tab of useService.useArea; let i = index; ">
       <!--<table style="width:100%; position:absolute; top: 0; 
         bottom: 0; left: 0; right: 0; border: 1;">-->
       <table style="width: 80%;  margin: 0 0 0 10%; ">
         <thead style="background-color: black; color: white; border: 1px solid;">
           <th style="text-align: center;">Nombre</th>
           <th style="text-align: center;">Medidas</th>
-          <th style="text-align: center;">Costo</th>
           <th style="text-align: center;">Prf.|| M</th>
+          <th style="text-align: center;">Costo</th>
         </thead>
         <tbody>
           <tr *ngFor="let b  of tab.areas; let i = index; ">
             <td style="text-align: center; border-bottom: 1px solid;">{{b.numCuar}}</td>
             <td style="text-align: center; border-bottom: 1px solid;">
-              <p style="margin: 1pt 0 1pt 0;" *ngFor="let d of b.sumLados; let e = index"><a style="color: black;" *ngIf="b.mLineal != 0">{{d}} Mts</a><a style="color: black;" *ngIf="b.mLineal == 0">0 Mts</a></p>
+              <p style="margin: 1pt 0 1pt 0;" *ngFor="let d of b.sumLados; let e = index"><a style="color: black;"
+                  *ngIf="b.mLineal != 0">{{d}} Mts</a><a style="color: black;" *ngIf="b.mLineal == 0">0 Mts</a></p>
               <!--<ul >
                 <li *ngFor="let d of b.sumLados; let e = index">
                     {{d}} Mts
@@ -59,12 +60,12 @@
               </ul>
              <pre> {{tab.areas.area.lados | json}} </pre> -->
             </td>
-            <td style="text-align: center; border-bottom: 1px solid;">
-              {{b.result1 | currency: 'USD' | lowercase}}
-            </td>
             <td style=" border-bottom: 1px solid;">
               <p *ngIf="b.resultado"> {{b.resultado}} P</p>
               <p *ngIf="b.mCu"> {{b.mCu}} M²</p>
+            </td>
+            <td style="text-align: center; border-bottom: 1px solid;">
+              {{b.result1 | currency: 'USD' | lowercase}}
             </td>
           </tr>
           <tr>
@@ -77,9 +78,24 @@
       <br>
     </div>
     <br>
+    <hr style=" background: #797171b0; width: 90%;">
+    <br>
     <div style="margin: 0 0 0 2em;">
-      <p>P: Perforaciones</p>
-      <p>M: Metros</p>
+      <p style="font-size: 19px;     margin-top: -16px;">P: Perforaciones</p>
+      <p style="font-size: 19px;     margin-top: -16px;">M: Metros</p>
+      <div style="display: flex">
+        <div style="margin-right: 10px;">
+          <h3 style="font-size: 21px; font-weight: bold;">Pre Costrución</h3>
+          <p style="font-size: 19px;     margin-top: -16px;"> Mesclas: {{useService.mescla}} M</p>
+          <p style="font-size: 19px;     margin-top: -16px;"> Rendimiento: {{useService.rendimiento}} xLt</p>
+        </div>
+
+        <div >
+          <h3 style="font-size: 21px; font-weight: bold;">Post Costrución</h3>
+          <p style="font-size: 19px; margin-top: -16px;"> Mesclas: {{useService.mescla1}} M</p>
+          <p style="font-size: 19px; margin-top: -16px;"> Rendimiento: {{useService.rendimiento1}} xLt</p>
+        </div>
+      </div>
     </div>
   </div>
   <br>

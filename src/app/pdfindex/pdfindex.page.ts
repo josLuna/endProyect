@@ -31,7 +31,7 @@ export class PDFIndexPage implements OnInit {
       //console.log(this.useService.idCli)
       this.list = []
       this.listLad = []
-      
+      this.useService.costos()
     }
 
   ngOnInit() {
