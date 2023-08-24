@@ -1,50 +1,79 @@
 <br>
+<!-- <h1 class="title">CALCULO PERIMETRAL</h1> -->
+<h3 class="title">Termita Subterranea</h3>
+<!-- <h3 class="term">Termita Subterranea</h3> -->
 <br>
-<h1 class="title">CALCULO PERIMETRAL</h1>
-
-<h3 class="term">Termita Subterranea</h3>
+<div (click)="userService.edtnombre(true, id)">
+<h2 class="nameCal">Nombre: {{userService.nameCal}}</h2>
+<h3 class="nameCal">Calle: {{userService.datos.calle}} #{{ userService.datos.nuDom }}</h3>
+<h4 class="nameCal">Colonia: {{ userService.datos.colonia }}</h4>
+</div>
+<!--<a class="nameCal" style="text-decoration: underline;" (click)="agrega()">
+  (Mostrar Areas) &nbsp;&nbsp;<ion-icon name="eye-outline"></ion-icon>
+</a>-->
 <br>
-  <h3 class="nameCal">{{userService.nameCal}}</h3>
-  <a class="nameCal" style="text-decoration: underline;" (click)="agrega()">
-    (Mostrar Areas) &nbsp;&nbsp;<ion-icon  name="eye-outline"></ion-icon>
-  </a>
-<br>
-<br>
-
-<ion-item>
-  <h3 *ngIf="toggle == false" class="item" (click)="tog()">Post Costrucción</h3>
-  <h3 *ngIf="toggle == true" (click)="tog()" class="item">Pre Construcción</h3>
-  <ion-toggle class="togl" [(ngModel)]="toggle"></ion-toggle>
+<!-- <ion-item>
+  <ion-button>Nueva Carga</ion-button>
+  <ion-button >Editar</ion-button>
+  <ion-button (click)="agrega()">Ver Cargas &nbsp;<ion-icon name="logo-microsoft"></ion-icon></ion-button>
+</ion-item> -->
+<ion-item color="medium" style="border-radius: 0px 0 15px 0px; padding-top: 10px;" *ngIf="userService.nAr == true" (click)="nArea()">
+  <ion-label>Sin registro</ion-label>
+  <ion-icon name="add-circle"></ion-icon>
+  <!-- <ion-label><ion-button slot="end">Nuevo Registro </ion-button></ion-label> -->
 </ion-item>
-<ion-item class="item1">
-  <p class="p1">
-      Marca el boton para cambiar a 
-  </p>&nbsp;&nbsp;
-  <p *ngIf="toggle == false" style="color: #3880ff;">Pre Costruccion</p>
-  <p *ngIf="toggle == true" style="color: #20419b;">Post Costruccion</p>
-</ion-item>
-<br>
-<ion-item class="title1">
-  <ion-input type="string" placeholder="Nombra el Area(Sala)" [(ngModel)]="selList" class="form-control"></ion-input>
-</ion-item>
+<div *ngIf="userService.nAr1 == true">
+  <ion-item class="title1" style="--border-style: none;">
+  <ion-button  fill="clear" slot="end"  style="color: red; " (click)="nArea()">Cancelar</ion-button>
+  </ion-item>
+  <ion-item class="title1">
+    <ion-input type="string" placeholder="Nombra el Area(Sala)" [(ngModel)]="selList" class="form-control"></ion-input>
+  </ion-item>
+  <ion-item class="title1">
+    <ion-input type="number" placeholder="Medida: 8 M" [(ngModel)]="ladox" class="form-control"></ion-input>
+  </ion-item>
+  <!-- <br>
+<div class="content" >
 
-<br>
-<div class="content">
-  <div class="lado1">
+  <div class="lado1" >
     <ion-item class="title1">
-      <ion-input type="number" placeholder="Medida: 8" [(ngModel)]="ladox" class="form-control"></ion-input>
+      <ion-input type="number" placeholder="Medida: 8 M" [disabled]="visible2" [(ngModel)]="ladox" class="form-control"></ion-input>
+    </ion-item>
+    <ion-item class="title1">
+      <ion-input type="number" placeholder="Medida: 8 M" [(ngModel)]="ladox" class="form-control"></ion-input>
     </ion-item>
   </div>
   <br>
   <div class="lado2">
-    <ion-button class="btnPrin1"  style="--border-radius: 10em; width: 5em; margin-left: 4em;" (click)="sumLado()">
-      <!--<ion-icon style=" font-size: 1em;" name="add-outline"></ion-icon>-->
-     Add
+    <ion-button class="btnPrin1" style="--border-radius: 10em; width: 5em; margin-left: 4em;" (click)="sumLado()">
+      <ion-icon style=" font-size: 1em;" name="add-outline"></ion-icon>
+      Add
     </ion-button>
   </div>
+</div> -->
+
+
+  <ion-item class="esp">
+    <h3 *ngIf="toggle == false" class="item" (click)="tog()"><strong> Post Costrucción </strong></h3>
+    <h3 *ngIf="toggle == true" (click)="tog()" class="item"><strong>Pre Construcción</strong></h3>
+    <ion-toggle class="togl" [(ngModel)]="toggle"></ion-toggle>
+  </ion-item>
+  <ion-button expand="block" (click)="sumLado()">
+    Add
+  </ion-button>
+  <br>
 </div>
-<br>
+<!-- <ion-item class="item1">
+  <p class="p1">
+    Marca el boton para cambiar a
+  </p>&nbsp;&nbsp;
+  <p *ngIf="toggle == false" style="color: #3880ff;">Pre Costruccion</p>
+  <p *ngIf="toggle == true" style="color: #20419b;">Post Costruccion</p>
+</ion-item> -->
+
+<!--Item para ver si cambian datos-->
 <ion-item class="title1" *ngFor="let ladosAux of sumLados1; let i = index">
+
   <a>{{ladosAux}} Mts</a>
   <ion-button color="medium" slot="end" (click)="modificarLado(i)">
     <ion-icon name="pencil-outline"></ion-icon>
@@ -56,7 +85,9 @@
     <ion-icon name="trash-outline"></ion-icon>
   </ion-button>
 </ion-item>
+<!--Item para ver si cambian datos-->
 <ion-item class="title1" *ngFor="let ladosAux of sumLados2; let i = index">
+  <ion-input [(ngModel)]="ladosAux[i]" value="ladosAux"></ion-input>
   <a>{{ladosAux }} Mts</a>
   <ion-button color="medium" slot="end" (click)="modificarLado2(i)">
     <ion-icon name="pencil-outline"></ion-icon>
@@ -68,37 +99,103 @@
     <ion-icon name="trash-outline"></ion-icon>
   </ion-button>
 </ion-item>
-
+<br>
 <ion-button class="btnPrin1" *ngIf="lado == true" (click)="modList(id)">Modificar</ion-button>
-
+<ion-button class="btnPrin1" *ngIf="lado == true" (click)="modList(id)">Add Area</ion-button>
 <br>
 <!--button for calculator the area> -->
-<ion-button class="btnPrin" (click)="calcular()" *ngIf="sumLados.length != 0 && lado == false">Calcular&nbsp;&nbsp;<ion-icon name="square-outline"></ion-icon>
+<ion-button class="btnPrin" (click)="calcular()"
+  *ngIf="sumLados.length != 0 && lado == false">Calcular&nbsp;&nbsp;<ion-icon name="square-outline"></ion-icon>
 </ion-button>
-
+<!-- Boton para agregar mas areas -->
+<ion-button size="small" *ngIf="userService.nAr1 == false && userService.nAr == false" (click)="aAre()">
+  Agregar mas Areas
+</ion-button>
 <!--this list can see all areas whit cost and measurement-->
-
-<ion-list>
+<div *ngFor="let sumListAux of userService.sumList; let i = index">
+<table >
+  <tr>
+    <th style="border-radius: 3px 0 0 3px;">Areas</th>
+    <th>Dim</th>
+    <th>Pre / Post</th>
+    <th *ngIf="sumListAux.resultado">perF</th>
+    <th>Cost</th>
+    <th style="border-radius: 0 3px 3px 0;">Edit</th>
+  </tr>
+  <tr>
+    <td>{{sumListAux.numCuar}}</td>
+    <td *ngIf="sumListAux.mLineal != 0">{{sumListAux.mLineal}} M</td>
+    <td *ngIf="sumListAux.tog==true">{{sumListAux.mCu}} M²</td>
+    <td>{{sumListAux.u}}</td>
+    <td *ngIf="sumListAux.resultado">{{sumListAux.resultado}}</td>
+    <td>{{sumListAux.result1| currency: 'USD' | lowercase}}</td>
+    <td>
+      <ion-button *ngIf="check == false" size="small" (click)="modificarLado1(i)">
+        Edit
+      </ion-button>
+      <ion-button *ngIf="check == true" color="danger" size="small" (click)="eliminarContact(i)">
+       <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </td>
+  </tr>
+  <br>
+  <!-- <tr>
+    <th style="border-radius: 3px;">total</th>
+  </tr>
+  <tr>
+    <td>
+      {{sumListAux.result1| currency: 'USD' | lowercase}}
+    </td>
+  </tr> -->
+</table>
+</div>
+<br>
+<!-- <div style="width:30% !important;" *ngIf="p!=0">
+<table *ngFor="let sumListAux of sumList; let i = index">
+  <tr>
+    <th>total</th>
+  </tr>
+  <tr>
+    <td>
+      {{sumListAux.resultado| currency: 'USD' | lowercase}}
+    </td>
+  </tr>
+</table>
+</div> -->
+<div style="width:30% !important;" *ngIf="userService.p!=0">
+  <table >
+    <tr>
+      <th>total</th>
+    </tr>
+    <tr>
+      <td>
+        {{userService.p| currency: 'USD' | lowercase}}
+      </td>
+    </tr>
+  </table>
+</div>
+<br>
+<!-- <ion-list>
   <ion-card style="box-shadow: none; margin-bottom: 6pt;" *ngFor="let sumListAux of sumList; let i = index">
     <ion-card-header class="head" style="background: #dce2ea45;">
       <ion-card-title>
         <h2 class="h9">{{sumListAux.numCuar }}</h2>
       </ion-card-title>
-      <ion-card-title >
+      <ion-card-title>
         <p class="h8">{{sumListAux.u}}</p>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content style="background: #dce2ea45;">
-      <!--para el simbolo del cuadrado es alt+253-->
+      para el simbolo del cuadrado es alt+253
       <p class="p2" *ngIf="sumListAux.mLineal != 0">Cantidad: {{sumListAux.mLineal}} MT</p>
       <p class="p2" *ngIf="sumListAux.tog==true">Metros²: {{sumListAux.mCu}} M²</p>
       <p class="p2" *ngIf="sumListAux.tog==false">Perforaciones: {{sumListAux.resultado}} </p>
       <p class="p2">Costo: {{sumListAux.result1| currency: 'USD' | lowercase}} </p>
       <br>
       <ion-item style=" --background: #dadfe6; border-radius: 10pt;">
-        
+
         <ion-button *ngIf="check == false" slot="end" (click)="modificarLado1(i)">
-         Editar&nbsp;&nbsp;<ion-icon name="pencil-outline"></ion-icon> 
+          Editar&nbsp;&nbsp;<ion-icon name="pencil-outline"></ion-icon>
         </ion-button>
         <ion-button *ngIf="check == true" color="danger" slot="end" (click)="eliminarContact(i)">
           Eliminar&nbsp;&nbsp;<ion-icon name="trash-outline"></ion-icon>
@@ -108,27 +205,85 @@
     <hr class="hr1">
   </ion-card>
 
-</ion-list>
-<div class="borde" *ngIf="p!=0">
+</ion-list> -->
+<!-- <div class="borde" *ngIf="p!=0">
   <h2 class="total">Total: </h2>
   <p class="text1">{{p| currency: 'USD' | lowercase}}</p>
-</div>
-<ion-item *ngIf="sumList.length != 0">
+</div> -->
+<ion-item *ngIf="userService.sumList.length != 0">
   <ion-checkbox slot="start" (ngModel)="check" (click)="checkF()"></ion-checkbox>
-  <ion-label>Eliminar area ó areas</ion-label>
+  <ion-label>Eliminar area</ion-label>
 </ion-item>
-<!--button for save all  areas in  data base -->
-<ion-button class="btnPrin" *ngIf="sumList.length != 0 && agregar == false" (click)="presentAlert()">Guardar Areas&nbsp;&nbsp;<ion-icon
-    name="download-outline"></ion-icon>
+<br>
+<ion-item *ngIf="userService.sumList.length != 0">
+  <ion-checkbox slot="start"  (ngModel)="check1" (click)="checkF1()"></ion-checkbox>
+  <ion-label>Guardar archivo</ion-label>
+</ion-item>
+<br>
+<ion-button class="btnPrin" *ngIf="check1 == true" (click)="pdf()">
+  Descargar PDF
 </ion-button>
-<br *ngIf="agregar == true">
-<ion-button  class="btnPrin" *ngIf="agregar == true" (click)="moDato()">Guardar Modificación&nbsp;&nbsp;
+<!--button for save all  areas in  data base -->
+<ion-button class="btnPrin" *ngIf="userService.sumList.length != 0 && userService.agregar == false" (click)="presentAlert()">Guardar
+  Areas&nbsp;&nbsp;<ion-icon name="download-outline"></ion-icon>
+</ion-button>
+<br *ngIf="userService.agregar == true">
+<!-- <ion-button class="btnPrin" *ngIf="agregar == true" (click)="moDato()">Guardar Modificación&nbsp;&nbsp;
   <ion-icon name="save-outline"></ion-icon>
 </ion-button>
 <br>
 
 <br>
-<!--this button is for -->
-<ion-button *ngIf="sumList.length != 0" class="btnPrin2" (click)="can()">Cancelar &nbsp;&nbsp;<ion-icon name="close-circle-outline"></ion-icon>
+this button is for
+<ion-button *ngIf="sumList.length != 0" class="btnPrin2" (click)="can()">Cancelar &nbsp;&nbsp;<ion-icon
+    name="close-circle-outline"></ion-icon>
 </ion-button>
-<br>
+<br>-->
+<ion-modal id="isModalOpen"  [isOpen]="userService.isModalOpen">
+  <ng-template>
+    <ion-content>
+      <ion-toolbar>
+        <ion-title>Modificación de datos</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="light" (click)="userService.cerrarMo(false)" >Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-list>
+        <ion-item>
+          <ion-checkbox style="--margin: 8px 27px px 4px 1px; --size: 21px;" slot="start" [(ngModel)]="check" (click)="chek()"></ion-checkbox>
+          <ion-label>¡Eliminar cliente!</ion-label>
+        </ion-item>
+        <ion-item>
+          Nombre:&nbsp;
+          <ion-input type="text" [(ngModel)]="userService.nameCal"></ion-input>
+        </ion-item>
+        <ion-item>
+          calle:&nbsp;
+          <ion-input type="text" [(ngModel)]="userService.datos.calle" ></ion-input>
+        </ion-item>
+        <ion-item>
+          Colonia:&nbsp;
+          <ion-input type="text" [(ngModel)]="userService.datos.colonia" ></ion-input>
+        </ion-item>
+        <ion-item>
+          N° Domicilio:&nbsp;
+          <ion-input type="text" [(ngModel)]="userService.datos.nuDom" ></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="iuDum">
+          N° Domicilio Ext:&nbsp;
+          <ion-input type="text" [(ngModel)]="userService.datos.iuDum" ></ion-input>
+        </ion-item>
+        <ion-item *ngIf="codPos">
+          Codigo postal:
+          <ion-input type="text" [(ngModel)]="userService.datos.codPos" ></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button *ngIf="check == false" expand="block" (click)="putValor(false,id,'top')">
+        Guardar Cambios
+      </ion-button>
+      <ion-button *ngIf="check == true" expand="block" color="danger" (click)="elCli(false)">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

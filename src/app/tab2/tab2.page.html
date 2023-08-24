@@ -26,7 +26,7 @@
   </ion-button>
 </div>
   <!--<h2 style="color: red;" *ngIf="useService.contactosUser.length == 0">No hay contactos</h2>
-  
+
 <ion-item>
   <ion-list>
     <app-contacto *ngFor="let contacAux of useService.contactosUser" [name]="contacAux.nombre " [phone]="contacAux.nuDom" [mail]="contacAux.calle" [note]="contacAux.tipCliente" [id]="contacAux._id"  ></app-contacto>
@@ -58,7 +58,7 @@
     <!--<ion-list *ngIf="useService.status == 'true'">-->
     <ion-list class="listaTop">
       <!--<app-contacto *ngFor="let contacAux of useService.getCli; let i = index;" [name]="contacAux.name" [id]="contacAux._id" [IP]="i"></app-contacto>-->
-      <app-contacto *ngFor="let contacAux of useService.results; let i = index;" [name]="contacAux.nombre"  [id]="contacAux._id" [IP]="i"></app-contacto>
+      <app-contacto *ngFor="let contacAux of useService.results; let i = index;" [name]="contacAux.nombre"  [id]="contacAux._id" [IP]="i" [calle1]=contacAux.calle></app-contacto>
     </ion-list>
      <!--<ion-list *ngIf="useService.status == 'false'">-->
     <ion-list>

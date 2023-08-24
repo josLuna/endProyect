@@ -21,12 +21,12 @@ export class PDFIndexPage implements OnInit {
   calle:string
   colonia:string
   nuDom:number
-  iuDum: string 
+  iuDum: string
   nombre:string
   list: any  []
   listLad: any []
   vie:boolean = false
-  constructor(private pdf1: PDFGenerator, private ptl: Platform, 
+  constructor(private pdf1: PDFGenerator, private ptl: Platform,
     private useService: UseService, public miRouter: Router) {
       //console.log(this.useService.idCli)
       this.list = []
@@ -35,7 +35,7 @@ export class PDFIndexPage implements OnInit {
     }
 
   ngOnInit() {
-    
+
   }
   pdf() {
     if(this.ptl.is('cordova')) {
@@ -50,10 +50,8 @@ export class PDFIndexPage implements OnInit {
       //no me crea nada ****
       this.html = document.getElementById("div1").innerHTML;
       //console.log(this.useService.useArea['0']['areas']['area']['lados'])
-      
+
     }
-
-
   }
   back(){
     this.useService.idCli = null
@@ -73,5 +71,5 @@ export class PDFIndexPage implements OnInit {
     this.miRouter.navigate(['tabs', 'tab4'])
     console.log(this.useService.idCli)
   }
-  
+
 }

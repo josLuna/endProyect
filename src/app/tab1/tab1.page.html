@@ -1,6 +1,6 @@
 
   <!--Este es el Formulario para capturae la informacion del cliente,
-      captura los siguentes datos, nombre, numero de casa, nombre de calle, 
+      captura los siguentes datos, nombre, numero de casa, nombre de calle,
       numero interior y colonia. tambien se captura el dato de la fecha. SEAT
   -->
 <ion-header [translucent]="true">
@@ -38,6 +38,11 @@
     </ion-item>
     <br>
     <ion-item>
+      <ion-label position="floating">Codigo Postal:</ion-label>
+      <ion-input [(ngModel)]="useService.codPos"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
       <ion-label position="floating">Colonia:</ion-label>
       <ion-input [(ngModel)]="useService.colonia"></ion-input>
     </ion-item>
@@ -45,6 +50,6 @@
   <br>
   <br>
   <ion-button class="btnPrin" (click)="useService.guardarCliente()">
-     Agregar &nbsp;&nbsp;<ion-icon name="person-add-outline"></ion-icon> 
+     Continuar &nbsp;&nbsp;<ion-icon name="send-outline"></ion-icon>
   </ion-button>
 </ion-content>

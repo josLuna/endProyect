@@ -51,6 +51,7 @@ export class UseService {
   date1: any
   nuDom1: number
   iuDum1: any
+  codPos:any
   o: number = 0
   iL: number = 0
   nomArr: any []
@@ -59,6 +60,16 @@ export class UseService {
   susses:boolean
   costosVal:boolean
   msgCon:boolean = false
+  datos:any = {}
+  moda:boolean = false
+  sumList:any = []
+  nAr: boolean
+  nAr1:boolean = false
+  agregar: boolean = false
+  p: number
+  isModalOpen: boolean
+  check:boolean
+  iuDum:number
   constructor(private http: HttpClient, private miRouter: Router,
     public Alerta: AlertController, private toastController: ToastController) {
     this.status = localStorage.getItem('status')
@@ -70,17 +81,21 @@ export class UseService {
     this.clienteC = []
     this.nuevoContacto = {}
     this.getCli = []
+    this.datos = {}
     this.getCostos = {}
     this.getProducto()
     this.nomArr = []
     this.susses= true
     this.costosVal = false
+    this.nAr= true
+    this.p = 0
     //this.getContacto()
     //this.getClients()
     this.getClients().subscribe(
       (respuesta)=>{
         this.nombres(respuesta)
       }
+
     );
     this.array1 = {
       costo: 20,
@@ -90,10 +105,10 @@ export class UseService {
       mescla1: 4,
       rendimiento1: 3,
     }
-    
+
   }
   getContacto() {
-    this.http.get('https://node-esqueleto-production.up.railway.app/api/users/getUsers').subscribe(
+    this.http.get('http://localhost:3000/api/users/getUsers').subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.contactosUser = res
@@ -109,7 +124,7 @@ export class UseService {
   putContacto(usuario) {
     this.nomArr = []
     console.log(usuario)
-    this.http.put('https://node-esqueleto-production.up.railway.app/api/users/updateClient', usuario).subscribe(
+    this.http.put('http://localhost:3000/api/users/updateClient', usuario).subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         //this.contactosUser = res
@@ -149,12 +164,13 @@ export class UseService {
     };
     return this.http
       .get <any>(
-        'https://node-esqueleto-production.up.railway.app/api/users/getClients',
+        'http://localhost:3000/api/users/getClients',
         httpOptions
       )
       .pipe(catchError((e) => 'e'));
   }
   nombres(res:any){
+
     this.status = localStorage.getItem('status')
     if(res.length==0){
       this.susses = false
@@ -162,21 +178,24 @@ export class UseService {
     }else{
       if(this.status=='true'){
         this.getCli = res
+        // the reverse is used to start from back to start
+          this.getCli.reverse()
         for (let i = 0; i < this.getCli.length; i++) {
           if(this.getCli[i]['name'] != 'e'){
             this.msgCon = false
-            this.nomArr.push({nombre:this.getCli[i]['name'],_id:this.getCli[i]['_id']})
+            this.nomArr.push({nombre:this.getCli[i]['name'],_id:this.getCli[i]['_id'],calle:this.getCli[i]['calle']})
           }else{
             this.msgCon = true
             console.log(this.msgCon)
             this.susses = false
             this.AlertaPequeña('Error en la consulta!!','top')
           }
-          
+
         }
-        
+
         this.data = this.nomArr
         this.results = this.data;
+        console.log(this.results)
       }else{
         console.log(this.status)
         this.getCli = []
@@ -185,7 +204,7 @@ export class UseService {
     }
   }
   getProducto() {
-    this.http.get('https://node-esqueleto-production.up.railway.app/api/costos/getCostos').subscribe(
+    this.http.get('http://localhost:3000/api/costos/getCostos').subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.getCostos = res
@@ -198,7 +217,7 @@ export class UseService {
       })
   }
   getPdf() {
-    this.http.get('https://node-esqueleto-production.up.railway.app/api/repdf/getpdf').subscribe(
+    this.http.get('http://localhost:3000/api/repdf/getpdf').subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.getPdf1 = res
@@ -215,7 +234,7 @@ export class UseService {
   getContacto1(usuario) {
 
 
-    this.http.post('https://node-esqueleto-production.up.railway.app/api/users/postUs', usuario).subscribe(
+    this.http.post('http://localhost:3000/api/users/postUs', usuario).subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.contactosUser = res
@@ -229,9 +248,10 @@ export class UseService {
       })
   }
   getArea(id) {
-    let Id = {
-      idCli: id
-    }
+
+    let Id = {nombre: id}
+
+    console.log(Id)
     var httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -239,11 +259,12 @@ export class UseService {
     };
     return this.http
       .post<any>(
-        'https://node-esqueleto-production.up.railway.app/api/areas/getArea',
+        'http://localhost:3000/api/areas/getArea',
         Id,
         httpOptions
       )
       .pipe(catchError((e) => 'error'));
+
 
     /*const usedata = fetch(`https://db-fum1.herokuapp.com/api/areas/getArea1/`+id).then(res => res)
     .then(data=> console.log(data))*/
@@ -273,7 +294,7 @@ export class UseService {
   }
   postClients(contactUser) {
     this.nomArr = []
-    this.http.post('https://node-esqueleto-production.up.railway.app/api/users/postClients', contactUser).subscribe(
+    this.http.post('http://localhost:3000/api/users/postClients', contactUser).subscribe(
       (res: any) => {
         this.getClients().subscribe(
           (respuesta)=>{
@@ -295,7 +316,7 @@ export class UseService {
       total: datos.total,
     }
     console.log(dato)
-    this.http.post('https://node-esqueleto-production.up.railway.app/api/areas/postArea', dato).subscribe(
+    this.http.post('http://localhost:3000/api/areas/postArea', dato).subscribe(
       (res: any) => {
         this.susses = true
         this.AlertaPequeña('Exito! \n Se guardo la información!','top')
@@ -319,7 +340,7 @@ export class UseService {
     };
     return this.http
       .post<any>(
-        'https://node-esqueleto-production.up.railway.app/api/users/getUser',
+        'http://localhost:3000p/api/users/getUser',
         usuario,
         httpOptions
       )
@@ -332,7 +353,7 @@ export class UseService {
     }
     console.log(id)
 
-    this.http.post('https://node-esqueleto-production.up.railway.app/api/users/deleteClient', body).subscribe(
+    this.http.post('http://localhost:3000/api/users/deleteClient', body).subscribe(
       (res: any) => {
         //this.nomArr = []
         this.getClients().subscribe(
@@ -345,7 +366,7 @@ export class UseService {
         this.AlertaPequeña('Se elimino un cliente','top')
       },
       err => {
-        
+
       }
     )
   }
@@ -355,18 +376,18 @@ export class UseService {
     }
     console.log(Area)
 
-    this.http.post('https://node-esqueleto-production.up.railway.app/api/areas/deleteAreas', Area).subscribe(
+    this.http.post('http://localhost:3000/api/areas/deleteAreas', Area).subscribe(
       (res: any) => {
         //this.AlertaPequeña('Se elimino un cliente','bottom')
       },
       err => {
-        
+
       }
     )
   }
   putArea(Areas) {
     this.nomArr = []
-    this.http.put('https://node-esqueleto-production.up.railway.app/api/areas/putArea', Areas).subscribe(
+    this.http.put('http://localhost:3000/api/areas/putArea', Areas).subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.getArea(Areas.idCli).subscribe(
@@ -392,21 +413,21 @@ export class UseService {
        nuDom:this.nuDom,
        tipCliente:this.tipCliente
      }
- 
+
      this.http.post('http://localhost:3000/api/empresas/setEmpresa',nuevaEmpresa).subscribe(
      (res:any)=>{
        this.getContacto()
      },
      err=>{
- 
+
      }
      )
- 
+
      this.nombre = this.calle = this.tipCliente = ''
      this.nuDom =  0
    }
    getEmpresa(idE){
-     
+
      console.log('--IDDEE',idE)
      let body={
        id:idE,
@@ -415,19 +436,19 @@ export class UseService {
        (res:any) => {
        //Aquí solo entra si la llamada es exitosa.
        this.nuevoContacto = res
- 
+
        console.log(this.nuevoContacto)
-     }, 
+     },
      err => {
        //aquí entra si es un error
        this.nuevoContacto = []
        console.log(err)
- 
- 
+
+
      })
    }
    putEmpresa(idEm){
-    
+
      let body = {
        id: idEm,
        nombre:this.nombre,
@@ -443,27 +464,32 @@ export class UseService {
        //aquí entra si es un error
        this.nuevoContacto = {}
        console.log(err)
- 
+
      })
- 
+
    }
- 
+
    deleteEmpresa(idEm){
      let body = {
        id:idEm
      }
-     
+
      this.http.post('http://localhost:3000/api/empresas/deleteEmpresa',body).subscribe(
      (res:any)=>{
        this.getContacto()
      },
      err=>{
- 
+
      }
      )
    }*/
 
   guardarCliente() {
+    this.useArea = []
+    this.sumList = []
+    this.p = 0
+    this.nAr = true
+    this.nAr1 = false
     // Creamos array con los meses del año
     const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
     // Creamos el objeto fecha instanciándolo con la clase Date
@@ -471,17 +497,22 @@ export class UseService {
     // Construimos el formato de salida
     this.date = fecha.getDate() + ' de ' + meses[fecha.getMonth()] + ' de ' + fecha.getUTCFullYear()
     console.log(this.date)
-    if (this.calle != null && this.name != null && this.nuDom != null && this.colonia != null) {
+    if (this.calle != null && this.name != null && this.nuDom != null && this.colonia != null && this.codPos != null) {
       let contacto1 = {
         name: this.name,
         calle: this.calle,
         nuDom: this.nuDom,
         IuDom: this.IuDom,
         colonia: this.colonia,
+        codPos:this.codPos,
         date: this.date,
       }
-
-
+      this.datos={
+        calle: this.calle,
+        colonia: this.colonia,
+        nuDom: this.nuDom,
+      }
+      this.nameCal=this.name
       this.status = localStorage.getItem('status')
       if (this.status == 'true' ) {
         if(this.msgCon){
@@ -490,19 +521,20 @@ export class UseService {
           console.log(this.msgCon)
           this.postClients(contacto1)
         }
-        
+
 
       } else {
         //this.clienteC.push(contacto1)
         this.contactUser.push(contacto1)
       }
-      this.miRouter.navigate(['tabs/tab2'])
+      this.miRouter.navigate(['tabs/tab4'])
       this.name = null
       this.calle = null
       this.nuDom = null
       this.IuDom = null
       this.colonia = null
       this.date = null
+      this.codPos = null
     } else {
       this.showAlert('Verifica que ningun dato este vasio', 'ERROR!!')
     }
@@ -523,7 +555,7 @@ export class UseService {
     this.costos()
     this.idCal = id
     this.nameCal = name
-    //console.log(this.idCal)
+    console.log(this.idCal)
     if(this.useArea.length == 0){
       this.getArea(id).subscribe(
         (respuesta) => {
@@ -538,15 +570,18 @@ export class UseService {
         }
       )
     }
-   
+
     this.miRouter.navigate(['tabs', 'tab4'])
   }
   UseArea(res: any) {
+    console.log(res)
     if (res.length == 0 || res == 'error') {
       //this.showAlert('Checa Tu conexion de red', 'ERROR!!')
       this.iL = 0
+      console.log(res)
     } else {
       this.useArea = res
+      this.moda = false
       for (let i = 0; i < this.useArea.length; i++) {
         this.iL = this.iL + 1
       }
@@ -578,7 +613,7 @@ export class UseService {
       this.mescla1 = this.getCostos['0']['preConstrucion']['mescla']
       this.rendimiento1 = this.getCostos['0']['preConstrucion']['rendimiento']
       }
-      
+
     } else {
 
       this.costo = null
@@ -631,7 +666,7 @@ export class UseService {
         this.denger(Comentario,position)
       }
     }
-   
+
   }
   buscar(id) {
     if (this.status == 'true') {
@@ -661,4 +696,69 @@ export class UseService {
     }
 
   }
+  /**
+   * agregar las areas a los clientes que sean nuevos o que no tengan
+   */
+  agrega() {
+
+    if (this.status == 'true') {
+      console.log(this.useArea)
+      if (this.useArea.length != 0) {
+        this.agregar = true
+        this.nAr = false
+        this.nAr1 = false
+        setTimeout(() => {
+
+          if (this.sumList.length == 0) {
+            this.sumList = this.useArea['0']['areas']
+            console.log(this.sumList, 'Estos son las areas')
+            this.p = this.useArea['0']['total']
+          }
+          // else {
+          //   this.useArea = []
+          //   this.sumList = []
+          //   this.agrega()
+          //   // this.showAlert('Ya hay informacion cargada', 'ERROR!!!')
+          // }
+        }, 100);
+
+      } else {
+        this.nAr1 = false
+        this.agregar = false
+        this.susses = false
+        this.nAr = true
+        //this.agrega()
+        console.log('Alerta pequeña')
+        //this.AlertaPequeña('no tiene informacion guardada!', 'top')
+        //this.userService.showAlert('Este cliente no tiene datos!!', 'ERROR!!!')
+      }
+    } else {
+      if (this.todo.length == 0) {
+        this.susses = false
+        this.AlertaPequeña('Sin internet! | Sin datos!', 'top')
+      } else {
+        if (this.sumList.length == 0) {
+          this.sumList = this.todo['0']['Areas']
+          console.log(this.sumList)
+          //this.sumList = this.todo
+          this.p = this.todo['0']['total']
+        } else {
+          this.showAlert('Ya hay informacion cargada', 'ERROR!!!')
+        }
+      }
+      //this.userService.susses = false
+      //this.userService.AlertaPequeña('Sin internet!','top')
+    }
+
+  }
+  edtnombre(isOpen, id){
+    this.isModalOpen = isOpen
+    this.buscar(id)
+    this.check == false
+    console.log('si habre esta opcion')
+  }
+  cerrarMo(isOpen, id){
+    this.isModalOpen = isOpen
+  }
+
 }

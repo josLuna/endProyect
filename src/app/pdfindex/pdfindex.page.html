@@ -37,8 +37,9 @@
     <h3 *ngIf=" useService.useArea.length == 0" style="font-size: 30px;
     text-align: center; color: red;">Notiene registro de areas</h3>
     <h3 style="font-size: 1.5em; text-align: center;">Tabla de areas</h3>
+
     <div class="tog" *ngFor="let tab of useService.useArea; let i = index; ">
-      <!--<table style="width:100%; position:absolute; top: 0; 
+      <!--<table style="width:100%; position:absolute; top: 0;
         bottom: 0; left: 0; right: 0; border: 1;">-->
       <table style="width: 80%;  margin: 0 0 0 10%; ">
         <thead style="background-color: black; color: white; border: 1px solid;">
@@ -51,8 +52,10 @@
           <tr *ngFor="let b  of tab.areas; let i = index; ">
             <td style="text-align: center; border-bottom: 1px solid;">{{b.numCuar}}</td>
             <td style="text-align: center; border-bottom: 1px solid;">
-              <p style="margin: 1pt 0 1pt 0;" *ngFor="let d of b.sumLados; let e = index"><a style="color: black;"
-                  *ngIf="b.mLineal != 0">{{d}} Mts</a><a style="color: black;" *ngIf="b.mLineal == 0">0 Mts</a></p>
+              <p style="margin: 1pt 0 1pt 0;" *ngFor="let d of b.sumLados; let e = index">
+                <a style="color: black;"
+                  *ngIf="b.mLineal != 0">{{d}} Mts</a><a style="color: black;" *ngIf="b.mLineal == 0">
+                    0 Mts</a></p>
               <!--<ul >
                 <li *ngFor="let d of b.sumLados; let e = index">
                     {{d}} Mts
