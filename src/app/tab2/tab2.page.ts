@@ -11,9 +11,10 @@ export class Tab2Page {
   msgAlert:boolean
   constructor(private useService:UseService,private miRouter: Router) {
     this.msgAlert = false
+
   }
   handleChange(event) {
-   
+
     const val = event.target.value.toLowerCase();
     this.useService.results = this.useService.data.filter(d => d.nombre.toLowerCase().indexOf(val) > -1)
     //console.log(this.useService.results)
@@ -42,7 +43,7 @@ export class Tab2Page {
       }
       event.target.complete();
     }, 2000);
-   
+
   }
   Lista(){
     this.useService.msgCon= true

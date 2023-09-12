@@ -40,10 +40,10 @@
     <h2 style="color: rgb(217, 255, 0);"*ngIf="useService.status == 'false'"  class="Meng" >¡Captura al cliente!</h2>
   </ion-item>-->
   <ion-fab slot="fixed" vertical="bottom" horizontal="start"  >
-    <ion-fab-button  id="popover-button">
+    <ion-fab-button  id="right-end">
       <ion-icon name="add-circle"></ion-icon>
     </ion-fab-button>
-    <ion-popover  trigger="popover-button" [dismissOnSelect]="true" >
+    <ion-popover  trigger="right-end" side="right" alignment="end" [dismissOnSelect]="true"  >
       <!--<ng-template>
         <ion-content class="ion-padding" (click)="Lista()">Hello World!</ion-content>
       </ng-template>-->

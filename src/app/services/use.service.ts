@@ -70,6 +70,7 @@ export class UseService {
   isModalOpen: boolean
   check:boolean
   iuDum:number
+  safData:boolean = false
   constructor(private http: HttpClient, private miRouter: Router,
     public Alerta: AlertController, private toastController: ToastController) {
     this.status = localStorage.getItem('status')
@@ -108,7 +109,7 @@ export class UseService {
 
   }
   getContacto() {
-    this.http.get('http://localhost:3000/api/users/getUsers').subscribe(
+    this.http.get('https://node-esqueleto.onrender.com/api/users/getUsers').subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.contactosUser = res
@@ -124,7 +125,7 @@ export class UseService {
   putContacto(usuario) {
     this.nomArr = []
     console.log(usuario)
-    this.http.put('http://localhost:3000/api/users/updateClient', usuario).subscribe(
+    this.http.put('https://node-esqueleto.onrender.com/api/users/updateClient', usuario).subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         //this.contactosUser = res
@@ -133,6 +134,7 @@ export class UseService {
             this.nombres(respuesta)
           }
         );
+
       },
       err => {
         //aquí entra si es un error
@@ -164,7 +166,7 @@ export class UseService {
     };
     return this.http
       .get <any>(
-        'http://localhost:3000/api/users/getClients',
+        'https://node-esqueleto.onrender.com/api/users/getClients',
         httpOptions
       )
       .pipe(catchError((e) => 'e'));
@@ -204,7 +206,7 @@ export class UseService {
     }
   }
   getProducto() {
-    this.http.get('http://localhost:3000/api/costos/getCostos').subscribe(
+    this.http.get('https://node-esqueleto.onrender.com/api/costos/getCostos').subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.getCostos = res
@@ -217,7 +219,7 @@ export class UseService {
       })
   }
   getPdf() {
-    this.http.get('http://localhost:3000/api/repdf/getpdf').subscribe(
+    this.http.get('https://node-esqueleto.onrender.com/api/repdf/getpdf').subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.getPdf1 = res
@@ -234,7 +236,7 @@ export class UseService {
   getContacto1(usuario) {
 
 
-    this.http.post('http://localhost:3000/api/users/postUs', usuario).subscribe(
+    this.http.post('https://node-esqueleto.onrender.com/api/users/postUs', usuario).subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.contactosUser = res
@@ -259,7 +261,7 @@ export class UseService {
     };
     return this.http
       .post<any>(
-        'http://localhost:3000/api/areas/getArea',
+        'https://node-esqueleto.onrender.com/api/areas/getArea',
         Id,
         httpOptions
       )
@@ -294,7 +296,7 @@ export class UseService {
   }
   postClients(contactUser) {
     this.nomArr = []
-    this.http.post('http://localhost:3000/api/users/postClients', contactUser).subscribe(
+    this.http.post('https://node-esqueleto.onrender.com/api/users/postClients', contactUser).subscribe(
       (res: any) => {
         this.getClients().subscribe(
           (respuesta)=>{
@@ -316,7 +318,7 @@ export class UseService {
       total: datos.total,
     }
     console.log(dato)
-    this.http.post('http://localhost:3000/api/areas/postArea', dato).subscribe(
+    this.http.post('https://node-esqueleto.onrender.com/api/areas/postArea', dato).subscribe(
       (res: any) => {
         this.susses = true
         this.AlertaPequeña('Exito! \n Se guardo la información!','top')
@@ -340,7 +342,7 @@ export class UseService {
     };
     return this.http
       .post<any>(
-        'http://localhost:3000p/api/users/getUser',
+        'https://node-esqueleto.onrender.com/api/users/getUser',
         usuario,
         httpOptions
       )
@@ -353,7 +355,7 @@ export class UseService {
     }
     console.log(id)
 
-    this.http.post('http://localhost:3000/api/users/deleteClient', body).subscribe(
+    this.http.post('https://node-esqueleto.onrender.com/api/users/deleteClient', body).subscribe(
       (res: any) => {
         //this.nomArr = []
         this.getClients().subscribe(
@@ -376,7 +378,7 @@ export class UseService {
     }
     console.log(Area)
 
-    this.http.post('http://localhost:3000/api/areas/deleteAreas', Area).subscribe(
+    this.http.post('https://node-esqueleto.onrender.com/api/areas/deleteAreas', Area).subscribe(
       (res: any) => {
         //this.AlertaPequeña('Se elimino un cliente','bottom')
       },
@@ -387,7 +389,7 @@ export class UseService {
   }
   putArea(Areas) {
     this.nomArr = []
-    this.http.put('http://localhost:3000/api/areas/putArea', Areas).subscribe(
+    this.http.put('https://node-esqueleto.onrender.com/api/areas/putArea', Areas).subscribe(
       (res: any) => {
         //Aquí solo entra si la llamada es exitosa.
         this.getArea(Areas.idCli).subscribe(

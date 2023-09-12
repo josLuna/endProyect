@@ -30,6 +30,7 @@
         </ion-buttons>
       </ion-toolbar>
       <ion-list>
+        <br>
         <ion-item>
           Fecha:&nbsp;
           <ion-input type="text" [(ngModel)]="date" disabled="true"></ion-input>
@@ -55,6 +56,14 @@
           Codigo postal:
           <ion-input type="text" [(ngModel)]="codPos" disabled="true"></ion-input>
         </ion-item>
+        <!-- <ion-item *ngIf="codPos">
+          Constaco:
+          <ion-input type="text"  disabled="true"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="codPos">
+          Correo:
+          <ion-input type="text"  disabled="true"></ion-input>
+        </ion-item> -->
       </ion-list>
       <!-- <ion-item>
         <ion-checkbox style="--margin: 8px 27px px 4px 1px; --size: 21px;" slot="start" [(ngModel)]="check" (click)="chek()"></ion-checkbox>
@@ -63,7 +72,8 @@
       <!-- <ion-button *ngIf="check == false" expand="block" (click)="modificar(false,id,'top')">
         Guardar Cambios
       </ion-button> -->
-      <ion-button *ngIf="check == false" expand="block" (click)="modificar(false,IP,id,name)">
+      <br>
+      <ion-button *ngIf="check == false" color="medium" expand="block" (click)="modificar(false,IP,id,name)">
         Ver Carga
       </ion-button>
       <ion-button *ngIf="check == true" expand="block" color="danger" (click)="cerrarMo(false,id)">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>

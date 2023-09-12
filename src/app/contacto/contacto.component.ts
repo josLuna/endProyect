@@ -75,6 +75,7 @@ export class ContactoComponent implements OnInit {
     this.useService.idCal = this.id1
     this.useService.nameCal = name
     this.useService.p = 0
+    this.useService.safData = false
     if(this.useService.useArea.length == 0){
       this.useService.useArea = []
       this.useService.sumList = []
@@ -86,7 +87,6 @@ export class ContactoComponent implements OnInit {
         }
       )
     }else{
-
       this.useService.useArea = []
       this.useService.sumList = []
       this.useService.getArea(name).subscribe(
@@ -95,10 +95,11 @@ export class ContactoComponent implements OnInit {
         }
       )
     }
+
     setTimeout(() => {
       this.useService.agrega()
       this.miRouter.navigate(['tabs', 'tab4'])
-    }, 300);
+    }, 700);
 
 
     /*this.useService.susses = true

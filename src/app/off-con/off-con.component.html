@@ -1,56 +1,82 @@
-<ion-item class="tip1" >
-  <ion-icon class="check" name="globe-sharp" *ngIf="useService.msgCon == false"></ion-icon>
-  <ion-icon class="check2" name="bug-sharp" *ngIf="useService.msgCon == true"></ion-icon>
-  <ion-label class="name" (click)="abrirMo(true, id)">{{name}}</ion-label>
-  <ion-fab style="position: initial;" >
-    <ion-fab-button size="small" color="light" class="botonLis">
+<ion-item (click)="abrirMo(true, id)">
+  <ion-label>
+    <h2>{{name}}</h2>
+    <p>{{calle1}}</p>
+  </ion-label>
+</ion-item>
+ <!--<ion-item class="tip1" >
+  <ion-icon class="check" name="checkmark-circle-outline"></ion-icon>
+  <ion-label class="name" ></ion-label>
+    <ion-label class="name2" ></ion-label>
+
+   <ion-fab style="position: initial;" >
+  <ion-fab-button size="small" color="light" class="botonLis">
       <ion-icon name="menu-sharp"></ion-icon>
     </ion-fab-button>
     <ion-fab-list  side="end" class="fab" >
-      <!--<ion-fab-button class="btnPrin1"   color="medium"  ><ion-icon name="information-circle"></ion-icon></ion-fab-button>-->
+      <ion-fab-button class="btnPrin1"   color="medium"  (click)="abrirMo(true, id)"><ion-icon name="information-circle"></ion-icon></ion-fab-button>
       <ion-fab-button  class="btnPrin1" color="primary"  (click)="useService.calculadora(IP,id,name)"><ion-icon name="calculator"></ion-icon></ion-fab-button>
       <ion-button  class="btnPrin1"   color="danger"  (click)="pdf(id)"><ion-icon name="document-text"></ion-icon></ion-button>
     </ion-fab-list>
   </ion-fab>
-  <!--<ion-button class="btnPrin" (click)="useService.calculadora(id,name)"><ion-icon name="calculator-outline"></ion-icon></ion-button>
-  <ion-button class="btnPrin1"   color="medium"  (click)="abrirMo(true, id)"><ion-icon name="information-circle-outline"></ion-icon></ion-button>
-  <ion-button class="btnPrin1"   color="danger"  (click)="pdf()"><ion-icon name="document-text-outline"></ion-icon></ion-button>-->
-</ion-item>
-
-<ion-modal  [isOpen]="isModalOpen">
+</ion-item>-->
+<ion-modal id="isModalOpen"  [isOpen]="isModalOpen">
   <ng-template>
     <ion-content>
       <ion-toolbar>
-        <ion-title>Informacion del Cliente</ion-title>
+        <ion-title>Informacion</ion-title>
         <ion-buttons slot="end">
-          <ion-button color="light" (click)="abrirMo(false)">Close</ion-button>
+          <ion-button color="light" (click)="abrirMo(false)" >Close</ion-button>
         </ion-buttons>
       </ion-toolbar>
       <ion-list>
+        <br>
         <ion-item>
+          Fecha:&nbsp;
           <ion-input type="text" [(ngModel)]="date" disabled="true"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="text" [(ngModel)]="calle"></ion-input>
+          calle:&nbsp;
+          <ion-input type="text" [(ngModel)]="calle" disabled="true"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="text" [(ngModel)]="colonia"></ion-input>
+          Colonia:&nbsp;
+          <ion-input type="text" [(ngModel)]="colonia" disabled="true"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="text" [(ngModel)]="nuDom"></ion-input>
+          N° Domicilio:&nbsp;
+          <ion-input type="text" [(ngModel)]="nuDom" disabled="true"></ion-input>
         </ion-item>
-        <ion-item *ngIf="IuDom">
-          <ion-input type="text" [(ngModel)]="IuDom"></ion-input>
+
+        <ion-item *ngIf="iuDum">
+          N° Domicilio Ext:&nbsp;
+          <ion-input type="text" [(ngModel)]="iuDum" disabled="true"></ion-input>
         </ion-item>
+        <ion-item *ngIf="codPos">
+          Codigo postal:
+          <ion-input type="text" [(ngModel)]="codPos" disabled="true"></ion-input>
+        </ion-item>
+        <!-- <ion-item *ngIf="codPos">
+          Constaco:
+          <ion-input type="text"  disabled="true"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="codPos">
+          Correo:
+          <ion-input type="text"  disabled="true"></ion-input>
+        </ion-item> -->
       </ion-list>
-      <br>
-      <br>
-        
-      <ion-button expand="block">
+      <!-- <ion-item>
+        <ion-checkbox style="--margin: 8px 27px px 4px 1px; --size: 21px;" slot="start" [(ngModel)]="check" (click)="chek()"></ion-checkbox>
+        <ion-label>¡Eliminar cliente!</ion-label>
+      </ion-item> -->
+      <!-- <ion-button *ngIf="check == false" expand="block" (click)="modificar(false,id,'top')">
         Guardar Cambios
-      </ion-button>
+      </ion-button> -->
       <br>
-      <ion-button expand="block" color="secondary" (click)="cerrarMo(false)">Registrar&nbsp;&nbsp;<ion-icon name="document-text-outline"></ion-icon></ion-button>
+      <ion-button *ngIf="check == false" color="medium" expand="block" (click)="modificar(false,IP,id,name)">
+        Ver Carga
+      </ion-button>
+      <ion-button *ngIf="check == true" expand="block" color="danger" (click)="cerrarMo(false,id)">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>
     </ion-content>
   </ng-template>
 </ion-modal>
